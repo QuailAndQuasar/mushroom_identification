@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb_checkpoints/
+
+# Data files (if large)
+*.csv
+*.xlsx
+*.pkl
+
+# macOS
+.DS_Store
+
+# Models (optional - uncomment if models are large)
+# models/*.pkl
+# models/*.h5
