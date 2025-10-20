@@ -1,0 +1,21 @@
+# ETL Pipeline configuration
+pipeline:
+  name: "mushroom_etl"
+  version: "1.0.0"
+  
+# Data sources
+sources:
+  uci_mushroom:
+    url: "https://archive.ics.uci.edu/ml/machine-learning-databases/mushroom/agaricus-lepiota.data"
+    format: "csv"
+    delimiter: ","
+    
+# Processing settings
+processing:
+  batch_size: 1000
+  max_workers: 4
+  
+# Output settings
+output:
+  format: "parquet"
+  compression: "snappy"

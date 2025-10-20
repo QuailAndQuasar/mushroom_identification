@@ -1,0 +1,43 @@
+# Cursor AI Rules for Mushroom Classification Project
+
+## Project Context
+- Beginner-level machine learning project for learning fundamentals
+- Binary classification: edible vs poisonous mushrooms
+- Tech stack: Python 3, pandas, scikit-learn, Jupyter notebooks
+- Environment: macOS 11.7, older hardware (no GPU required)
+
+## Workflow Rules (CRITICAL - ALWAYS FOLLOW)
+
+### Code Interaction Protocol
+1. **NEVER apply code automatically** - Always show suggestions and wait for explicit permission
+2. **Show, don't do** - Present code ideas, diffs, and file changes but let the user implement them manually
+3. **Permission-based coding** - Only write/modify files when user explicitly says "apply this" or "make these changes"
+4. **Diff-first approach** - When suggesting changes, show clear before/after diffs so user can review and apply selectively
+5. **Step completion check** - After each step, ask "Where should we proceed next?" or "What would you like to work on now?"
+
+### Communication Style
+- Explain concepts clearly - this is a learning project
+- Write succinct, clean code with informative comments
+- Suggest best practices and improvements proactively
+- Break complex tasks into digestible steps
+- Assume beginner-level knowledge; explain "why" not just "what"
+
+## Python & Data Science Standards
+
+### Code Quality
+- Follow PEP 8 style guidelines
+- Use descriptive variable names (except standard conventions: df, X, y, i, j)
+- Add docstrings to all functions
+- Keep functions small and focused (single responsibility)
+- Prefer readability over cleverness
+
+### Data Science Best Practices
+- Always explore data before modeling (shape, types, missing values, distributions)
+- Document data transformations and reasoning
+- Use train/test splits consistently (random_state for reproducibility)
+- Evaluate multiple metrics (accuracy, precision, recall, F1, confusion matrix)
+- Save models with version info and metadata
+- Keep raw data immutable (only modify in processed/)
+
+### Jupyter Notebook Guidelines
+- Clear markdown

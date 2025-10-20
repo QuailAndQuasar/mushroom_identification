@@ -1,0 +1,12 @@
+# Database configuration
+database:
+  url: "sqlite:///data/mushroom_etl.db"
+  echo: false
+  pool_size: 5
+  max_overflow: 10
+
+# Connection settings
+connection:
+  timeout: 30
+  retry_attempts: 3
+  retry_delay: 1
