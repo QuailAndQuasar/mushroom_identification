@@ -162,9 +162,114 @@ type(scope): description
 - `docs(readme): update setup instructions`
 - `test(load): add database loading tests`
 
+## Testing
+
+This project includes comprehensive tests for all ETL pipeline components. The test suite focuses on core functionality without bloat.
+
+### Test Structure
+
+```
+tests/
+├── conftest.py                    # Test configuration and fixtures
+├── test_extract/                  # Data extraction tests
+│   ├── test_base_extractor.py     # Base extractor interface tests
+│   ├── test_uci_mushroom_extractor.py  # UCI dataset extractor tests
+│   ├── test_file_extractor.py     # File-based extractor tests
+│   ├── test_api_extractor.py      # API extractor tests
+│   └── test_extraction_orchestrator.py  # Orchestrator tests
+├── test_transform/                # Data transformation tests (coming soon)
+├── test_load/                     # Data loading tests (coming soon)
+└── test_integration/              # End-to-end integration tests (coming soon)
+```
+
+### Running Tests
+
+#### Quick Test Run
+```bash
+# Run all tests
+python scripts/run_tests.py
+
+# Run specific test file
+python -m pytest tests/test_extract/test_base_extractor.py -v
+
+# Run tests with coverage
+python -m pytest tests/ --cov=src --cov-report=html
+```
+
+#### Test Categories
+
+| Test Type | Command | Purpose |
+|-----------|---------|---------|
+| **All Tests** | `python scripts/run_tests.py` | Run complete test suite with coverage |
+| **Extraction Tests** | `python -m pytest tests/test_extract/ -v` | Test data extraction components |
+| **Specific File** | `python -m pytest tests/test_extract/test_uci_mushroom_extractor.py -v` | Test specific component |
+| **Coverage Report** | `python -m pytest tests/ --cov=src --cov-report=html` | Generate HTML coverage report |
+
+#### Test Coverage
+
+The test suite covers:
+- ✅ **Core Functionality**: All essential extractor behaviors
+- ✅ **Error Handling**: Failure scenarios and edge cases  
+- ✅ **Data Validation**: Quality checks for extracted data
+- ✅ **Mock Testing**: External dependencies properly isolated
+- ✅ **Integration**: Orchestrator coordination testing
+
+#### Test Development
+
+When adding new tests:
+
+1. **Follow Naming Convention**: `test_<component>_<functionality>.py`
+2. **Use Fixtures**: Leverage `conftest.py` for reusable test data
+3. **Mock External Dependencies**: Use `unittest.mock` for HTTP requests, file I/O
+4. **Test Edge Cases**: Empty data, missing files, network errors
+5. **Keep Tests Focused**: One concept per test, clear assertions
+
+#### Example Test Structure
+
+```python
+class TestComponentName:
+    """Test component functionality."""
+    
+    def test_initialization(self):
+        """Test component initialization."""
+        # Test setup and configuration
+        
+    def test_success_case(self):
+        """Test successful operation."""
+        # Test happy path
+        
+    def test_error_handling(self):
+        """Test error scenarios."""
+        # Test failure cases
+```
+
+### Test Troubleshooting
+
+If tests fail:
+
+1. **Check Dependencies**: Ensure all test packages are installed
+   ```bash
+   pip install pytest pytest-cov
+   ```
+
+2. **Verify Environment**: Run validation script
+   ```bash
+   python scripts/validate_setup.py
+   ```
+
+3. **Check Test Files**: Ensure test files are in correct directories
+   ```bash
+   find tests/ -name "*.py" -type f
+   ```
+
+4. **Run Individual Tests**: Isolate failing tests
+   ```bash
+   python -m pytest tests/test_extract/test_base_extractor.py::TestBaseExtractor::test_initialization -v
+   ```
+
 ## Development
 
-- **Run tests**: `pytest`
+- **Run tests**: `python scripts/run_tests.py`
 - **Run ETL pipeline**: `python scripts/run_etl.py`
 - **Start Jupyter**: `jupyter lab`
 - **Validate setup**: `python scripts/validate_setup.py`
