@@ -124,11 +124,68 @@ If you encounter issues:
    pip list | grep -E "(pandas|numpy|sklearn)"
    ```
 
+## Git Workflow
+
+### Branch Strategy
+- `main`: Production-ready code
+- `develop`: Integration branch for features
+- `feature/*`: Individual feature development
+- `release/*`: Release preparation
+- `hotfix/*`: Critical bug fixes
+
+### Development Process
+1. **Create feature branch**: `git checkout -b feature/your-feature-name`
+2. **Make changes**: Develop your feature
+3. **Test changes**: Run tests and validation
+4. **Commit changes**: Use conventional commit messages
+5. **Push branch**: `git push origin feature/your-feature-name`
+6. **Create PR**: Pull request to develop branch
+7. **Review**: Code review and approval
+8. **Merge**: Merge to develop, then to main
+
+### Commit Message Format
+```
+type(scope): description
+
+[optional body]
+
+[optional footer]
+```
+
+**Types**: feat, fix, docs, style, refactor, test, chore
+**Scope**: component affected (e.g., config, extract, transform, load)
+**Description**: clear, concise description
+
+### Examples
+- `feat(extract): add API data extractor`
+- `fix(transform): resolve data type conversion issue`
+- `docs(readme): update setup instructions`
+- `test(load): add database loading tests`
+
 ## Development
 
 - **Run tests**: `pytest`
 - **Run ETL pipeline**: `python scripts/run_etl.py`
 - **Start Jupyter**: `jupyter lab`
+- **Validate setup**: `python scripts/validate_setup.py`
+
+## Project Status
+
+### ✅ Completed Foundation (Steps 1.1-1.5)
+- **Project Structure**: Complete directory organization
+- **Dependencies**: All required packages installed and validated
+- **Configuration**: Pydantic-based configuration management
+- **Environment Variables**: Secure handling of sensitive data
+- **Logging**: Centralized logging system
+- **Git Integration**: Version control with quality hooks
+- **Documentation**: Complete setup and usage instructions
+
+### 🚧 Next Steps (Step 2+)
+- **Data Extraction**: Build extractors for multiple data sources
+- **Data Transformation**: Implement cleaning and feature engineering
+- **Data Loading**: Create loading modules for different targets
+- **Machine Learning**: Build classification models
+- **ETL Orchestration**: Complete pipeline automation
 
 ## Contributing
 
