@@ -14,7 +14,8 @@ def run_tests():
             "-v", 
             "--cov=src", 
             "--cov-report=html",
-            "--cov-report=term"
+            "--cov-report=term",
+            "--tb=short"
         ], check=True)
         
         print("✅ All tests passed!")
