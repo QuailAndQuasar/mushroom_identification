@@ -75,10 +75,10 @@ def demo_extraction():
     orchestrator = ExtractionOrchestrator()
     
     # Add file extractor for sample data
-    file_extractor = FileExtractor({
-        "file_path": "data/raw/sample_mushrooms.csv",
-        "file_type": "csv"
-    })
+    file_extractor = FileExtractor(
+        file_path="data/raw/sample_mushrooms.csv",
+        file_type="csv"
+    )
     orchestrator.add_extractor(file_extractor)
     
     # Add UCI mushroom extractor (will use sample data for demo)

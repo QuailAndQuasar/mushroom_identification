@@ -62,7 +62,7 @@ def run_complete_etl(mode: str = "development") -> bool:
             "if_exists": "replace"
         })
         file_loader = FileLoader({
-            "file_format": "parquet",
+            "file_format": "csv",
             "output_dir": str(config.processed_data_dir)
         })
         pipeline.configure_loading([db_loader, file_loader])

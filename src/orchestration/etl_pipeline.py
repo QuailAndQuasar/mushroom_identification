@@ -257,8 +257,22 @@ class ETLPipeline:
         
         # Save pipeline logs
         log_file = output_dir / f"{self.pipeline_id}_pipeline_logs.json"
+        
+        # Convert numpy types to Python types for JSON serialization
+        def convert_numpy_types(obj):
+            if hasattr(obj, 'item'):
+                return obj.item()
+            elif isinstance(obj, dict):
+                return {k: convert_numpy_types(v) for k, v in obj.items()}
+            elif isinstance(obj, list):
+                return [convert_numpy_types(item) for item in obj]
+            else:
+                return obj
+        
+        serializable_stats = convert_numpy_types(self.stats)
+        
         with open(log_file, 'w') as f:
-            json.dump(self.stats, f, indent=2)
+            json.dump(serializable_stats, f, indent=2)
         
         self.logger.info(f"Pipeline logs saved to {log_file}")
     
