@@ -1,0 +1,184 @@
+{
+  "species": {
+    "edible": {
+      "Agaricus_bisporus": {
+        "common_name": "Button Mushroom / White Mushroom",
+        "scientific_name": "Agaricus bisporus",
+        "description": "The most commonly cultivated mushroom worldwide. Safe and delicious.",
+        "characteristics": {
+          "cap_shape": ["b", "x"],
+          "cap_surface": ["s", "f"],
+          "cap_color": ["w", "n", "b"],
+          "bruises": ["t"],
+          "odor": ["n", "m"],
+          "gill_size": ["b"],
+          "gill_color": ["w", "p"],
+          "stalk_shape": ["e"],
+          "stalk_root": ["e", "c"],
+          "stalk_surface_above_ring": ["s"],
+          "stalk_surface_below_ring": ["s"],
+          "veil_type": ["p"],
+          "ring_number": ["o"],
+          "ring_type": ["p"],
+          "spore_print_color": ["k", "n"]
+        }
+      },
+      "Pleurotus_ostreatus": {
+        "common_name": "Oyster Mushroom",
+        "scientific_name": "Pleurotus ostreatus",
+        "description": "Popular cultivated mushroom with a mild, pleasant taste.",
+        "characteristics": {
+          "cap_shape": ["f", "x"],
+          "cap_surface": ["s", "f"],
+          "cap_color": ["w", "n", "b", "g"],
+          "bruises": ["f"],
+          "odor": ["n", "m"],
+          "gill_size": ["b"],
+          "gill_color": ["w", "n"],
+          "stalk_shape": ["e", "t"],
+          "stalk_root": ["e"],
+          "stalk_surface_above_ring": ["s"],
+          "stalk_surface_below_ring": ["s"],
+          "veil_type": ["n"],
+          "ring_number": ["n"],
+          "ring_type": ["n"],
+          "spore_print_color": ["w", "n"]
+        }
+      },
+      "Lentinula_edodes": {
+        "common_name": "Shiitake",
+        "scientific_name": "Lentinula edodes",
+        "description": "Highly prized Asian mushroom with rich, umami flavor.",
+        "characteristics": {
+          "cap_shape": ["x", "f"],
+          "cap_surface": ["s", "y"],
+          "cap_color": ["n", "b", "g"],
+          "bruises": ["t"],
+          "odor": ["n", "m"],
+          "gill_size": ["b"],
+          "gill_color": ["w", "n"],
+          "stalk_shape": ["e", "t"],
+          "stalk_root": ["e"],
+          "stalk_surface_above_ring": ["s"],
+          "stalk_surface_below_ring": ["s"],
+          "veil_type": ["n"],
+          "ring_number": ["n"],
+          "ring_type": ["n"],
+          "spore_print_color": ["w", "n"]
+        }
+      },
+      "Cantharellus_cibarius": {
+        "common_name": "Golden Chanterelle",
+        "scientific_name": "Cantharellus cibarius",
+        "description": "Highly sought-after wild mushroom with fruity, apricot-like aroma.",
+        "characteristics": {
+          "cap_shape": ["x", "f"],
+          "cap_surface": ["s"],
+          "cap_color": ["y", "n"],
+          "bruises": ["f"],
+          "odor": ["n", "f"],
+          "gill_size": ["n"],
+          "gill_color": ["y", "n"],
+          "stalk_shape": ["e", "t"],
+          "stalk_root": ["e"],
+          "stalk_surface_above_ring": ["s"],
+          "stalk_surface_below_ring": ["s"],
+          "veil_type": ["n"],
+          "ring_number": ["n"],
+          "ring_type": ["n"],
+          "spore_print_color": ["y", "n"]
+        }
+      },
+      "Boletus_edulis": {
+        "common_name": "Porcini / King Bolete",
+        "scientific_name": "Boletus edulis",
+        "description": "Highly prized wild mushroom, often called the 'king of mushrooms'.",
+        "characteristics": {
+          "cap_shape": ["x", "f"],
+          "cap_surface": ["s"],
+          "cap_color": ["n", "b"],
+          "bruises": ["f"],
+          "odor": ["n", "m"],
+          "gill_size": ["n"],
+          "gill_color": ["w", "y"],
+          "stalk_shape": ["e", "t"],
+          "stalk_root": ["e"],
+          "stalk_surface_above_ring": ["s"],
+          "stalk_surface_below_ring": ["s"],
+          "veil_type": ["n"],
+          "ring_number": ["n"],
+          "ring_type": ["n"],
+          "spore_print_color": ["o", "y"]
+        }
+      }
+    },
+    "poisonous": {
+      "Amanita_phalloides": {
+        "common_name": "Death Cap",
+        "scientific_name": "Amanita phalloides",
+        "description": "Extremely poisonous mushroom responsible for most fatal poisonings.",
+        "characteristics": {
+          "cap_shape": ["x", "f"],
+          "cap_surface": ["s"],
+          "cap_color": ["w", "n", "g"],
+          "bruises": ["f"],
+          "odor": ["n", "m"],
+          "gill_size": ["b"],
+          "gill_color": ["w"],
+          "stalk_shape": ["e", "t"],
+          "stalk_root": ["e", "c"],
+          "stalk_surface_above_ring": ["s"],
+          "stalk_surface_below_ring": ["s"],
+          "veil_type": ["u"],
+          "ring_number": ["o"],
+          "ring_type": ["e"],
+          "spore_print_color": ["w"]
+        }
+      },
+      "Amanita_muscaria": {
+        "common_name": "Fly Agaric",
+        "scientific_name": "Amanita muscaria",
+        "description": "Iconic red mushroom with white spots. Poisonous and hallucinogenic.",
+        "characteristics": {
+          "cap_shape": ["x", "f"],
+          "cap_surface": ["s", "y"],
+          "cap_color": ["r", "e"],
+          "bruises": ["f"],
+          "odor": ["n", "m"],
+          "gill_size": ["b"],
+          "gill_color": ["w"],
+          "stalk_shape": ["e", "t"],
+          "stalk_root": ["e"],
+          "stalk_surface_above_ring": ["s"],
+          "stalk_surface_below_ring": ["s"],
+          "veil_type": ["u"],
+          "ring_number": ["o"],
+          "ring_type": ["e"],
+          "spore_print_color": ["w"]
+        }
+      },
+      "Galerina_marginata": {
+        "common_name": "Deadly Galerina",
+        "scientific_name": "Galerina marginata",
+        "description": "Small brown mushroom that is extremely poisonous.",
+        "characteristics": {
+          "cap_shape": ["x", "f"],
+          "cap_surface": ["s"],
+          "cap_color": ["n", "b"],
+          "bruises": ["f"],
+          "odor": ["n", "m"],
+          "gill_size": ["n"],
+          "gill_color": ["n", "b"],
+          "stalk_shape": ["e", "t"],
+          "stalk_root": ["e"],
+          "stalk_surface_above_ring": ["s"],
+          "stalk_surface_below_ring": ["s"],
+          "veil_type": ["n"],
+          "ring_number": ["n"],
+          "ring_type": ["n"],
+          "spore_print_color": ["n", "k"]
+        }
+      }
+    }
+  }
+}

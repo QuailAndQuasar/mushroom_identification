@@ -84,6 +84,34 @@
             margin-top: 10px;
             opacity: 0.8;
         }
+        .species-info {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            text-align: left;
+        }
+        .species-name {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .scientific-name {
+            font-style: italic;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .species-description {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.5;
+        }
+        .species-confidence {
+            font-size: 12px;
+            color: #888;
+            margin-top: 10px;
+        }
         .warning {
             background: #fff3cd;
             color: #856404;
@@ -236,6 +264,19 @@
             const isEdible = result.edible;
             const confidence = (result.confidence * 100).toFixed(1);
             
+            let speciesInfo = '';
+            if (result.species) {
+                const speciesConfidence = (result.species.species_confidence * 100).toFixed(1);
+                speciesInfo = `
+                    <div class="species-info">
+                        <div class="species-name">${result.species.common_name}</div>
+                        <div class="scientific-name">${result.species.scientific_name}</div>
+                        <div class="species-description">${result.species.description}</div>
+                        <div class="species-confidence">Species Match: ${speciesConfidence}%</div>
+                    </div>
+                `;
+            }
+            
             resultDiv.innerHTML = `
                 <div class="result ${isEdible ? 'edible' : 'poisonous'}">
                     ${isEdible ? '✅ EDIBLE' : '☠️ POISONOUS'}
@@ -243,6 +284,7 @@
                         Confidence: ${confidence}%
                     </div>
                 </div>
+                ${speciesInfo}
             `;
         }
     </script>
