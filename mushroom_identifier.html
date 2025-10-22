@@ -1,0 +1,251 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🍄 Mushroom Identifier</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+        select, input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        select:focus, input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        .button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            transition: transform 0.2s;
+        }
+        .button:hover {
+            transform: translateY(-2px);
+        }
+        .result {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .edible {
+            background: #d4edda;
+            color: #155724;
+            border: 2px solid #c3e6cb;
+        }
+        .poisonous {
+            background: #f8d7da;
+            color: #721c24;
+            border: 2px solid #f5c6cb;
+        }
+        .confidence {
+            font-size: 14px;
+            margin-top: 10px;
+            opacity: 0.8;
+        }
+        .warning {
+            background: #fff3cd;
+            color: #856404;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border: 1px solid #ffeaa7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🍄 Mushroom Identifier</h1>
+        <p style="text-align: center; color: #666; margin-bottom: 30px;">
+            Identify if a mushroom is edible or poisonous based on its characteristics
+        </p>
+        
+        <form id="mushroomForm">
+            <div class="form-group">
+                <label for="cap-shape">Cap Shape:</label>
+                <select id="cap-shape" name="cap-shape">
+                    <option value="">Select cap shape...</option>
+                    <option value="b">Bell</option>
+                    <option value="c">Conical</option>
+                    <option value="f">Flat</option>
+                    <option value="k">Knobbed</option>
+                    <option value="s">Sunken</option>
+                    <option value="x">Convex</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="cap-surface">Cap Surface:</label>
+                <select id="cap-surface" name="cap-surface">
+                    <option value="">Select cap surface...</option>
+                    <option value="f">Fibrous</option>
+                    <option value="g">Grooves</option>
+                    <option value="s">Smooth</option>
+                    <option value="y">Scaly</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="cap-color">Cap Color:</label>
+                <select id="cap-color" name="cap-color">
+                    <option value="">Select cap color...</option>
+                    <option value="b">Buff</option>
+                    <option value="c">Cinnamon</option>
+                    <option value="e">Red</option>
+                    <option value="g">Gray</option>
+                    <option value="n">Brown</option>
+                    <option value="p">Pink</option>
+                    <option value="r">Green</option>
+                    <option value="u">Purple</option>
+                    <option value="w">White</option>
+                    <option value="y">Yellow</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="bruises">Bruises:</label>
+                <select id="bruises" name="bruises">
+                    <option value="">Select bruising...</option>
+                    <option value="f">No</option>
+                    <option value="t">Yes</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="odor">Odor:</label>
+                <select id="odor" name="odor">
+                    <option value="">Select odor...</option>
+                    <option value="a">Almond</option>
+                    <option value="c">Creosote</option>
+                    <option value="f">Foul</option>
+                    <option value="l">Anise</option>
+                    <option value="m">Musty</option>
+                    <option value="n">None</option>
+                    <option value="p">Pungent</option>
+                    <option value="s">Spicy</option>
+                    <option value="y">Fishy</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="gill-size">Gill Size:</label>
+                <select id="gill-size" name="gill-size">
+                    <option value="">Select gill size...</option>
+                    <option value="b">Broad</option>
+                    <option value="n">Narrow</option>
+                </select>
+            </div>
+            
+            <button type="submit" class="button">🔍 Identify Mushroom</button>
+        </form>
+        
+        <div id="result" style="display: none;"></div>
+        
+        <div class="warning">
+            <strong>⚠️ Important:</strong> This tool is for educational purposes only. 
+            Never rely solely on automated identification for mushroom consumption. 
+            Always consult with expert mycologists before consuming any wild mushrooms.
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('mushroomForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const features = {};
+            
+            // Convert form data to feature format
+            for (let [key, value] of formData.entries()) {
+                if (value) {
+                    features[key + '_' + value] = true;
+                }
+            }
+            
+            try {
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(features)
+                });
+                
+                const result = await response.json();
+                displayResult(result);
+            } catch (error) {
+                console.error('Error:', error);
+                displayResult({error: 'Failed to get prediction'});
+            }
+        });
+        
+        function displayResult(result) {
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            
+            if (result.error) {
+                resultDiv.innerHTML = `
+                    <div class="result" style="background: #f8d7da; color: #721c24;">
+                        ❌ Error: ${result.error}
+                    </div>
+                `;
+                return;
+            }
+            
+            const isEdible = result.edible;
+            const confidence = (result.confidence * 100).toFixed(1);
+            
+            resultDiv.innerHTML = `
+                <div class="result ${isEdible ? 'edible' : 'poisonous'}">
+                    ${isEdible ? '✅ EDIBLE' : '☠️ POISONOUS'}
+                    <div class="confidence">
+                        Confidence: ${confidence}%
+                    </div>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>
+    

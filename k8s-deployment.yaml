@@ -1,0 +1,78 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mushroom-api
+  labels:
+    app: mushroom-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mushroom-api
+  template:
+    metadata:
+      labels:
+        app: mushroom-api
+    spec:
+      containers:
+      - name: mushroom-api
+        image: mushroom-api:latest
+        ports:
+        - containerPort: 5000
+        env:
+        - name: FLASK_ENV
+          value: "production"
+        - name: MODEL_PATH
+          value: "/app/models"
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 5000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 5000
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        volumeMounts:
+        - name: model-storage
+          mountPath: /app/models
+      volumes:
+      - name: model-storage
+        persistentVolumeClaim:
+          claimName: model-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mushroom-api-service
+spec:
+  selector:
+    app: mushroom-api
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 5000
+  type: LoadBalancer
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: model-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+    
