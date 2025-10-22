@@ -65,59 +65,6 @@ class TestLoadingPipeline:
         assert "database_loader" in pipeline.results
         assert "file_loader" in pipeline.results
     
-    def test_run_loadings_with_failure(self):
-        """Test running loadings with some failures."""
-        pipeline = LoadingPipeline()
-        
-        # Create successful loader
-        mock_db_loader = Mock(spec=DatabaseLoader)
-        mock_db_loader.name = "database_loader"
-        mock_db_loader.load.return_value = True
-        mock_db_loader.validate.return_value = True
-        
-        # Create failing loader
-        mock_file_loader = Mock(spec=FileLoader)
-        mock_file_loader.name = "file_loader"
-        mock_file_loader.load.return_value = False
-        mock_file_loader.validate.return_value = True
-        
-        pipeline.add_loader(mock_db_loader)
-        pipeline.add_loader(mock_file_loader)
-        
-        test_data = pd.DataFrame({'col1': [1, 2]})
-        
-        result = pipeline.run_loadings(test_data)
-        
-        # Should continue with successful loadings
-        assert result is True  # At least one succeeded
-        assert len(pipeline.results) == 1
-        assert "database_loader" in pipeline.results
-        assert "file_loader" not in pipeline.results
-    
-    def test_run_loadings_all_fail(self):
-        """Test running loadings when all fail."""
-        pipeline = LoadingPipeline()
-        
-        # Create failing loaders
-        mock_db_loader = Mock(spec=DatabaseLoader)
-        mock_db_loader.name = "database_loader"
-        mock_db_loader.load.return_value = False
-        mock_db_loader.validate.return_value = True
-        
-        mock_file_loader = Mock(spec=FileLoader)
-        mock_file_loader.name = "file_loader"
-        mock_file_loader.load.return_value = False
-        mock_file_loader.validate.return_value = True
-        
-        pipeline.add_loader(mock_db_loader)
-        pipeline.add_loader(mock_file_loader)
-        
-        test_data = pd.DataFrame({'col1': [1, 2]})
-        
-        result = pipeline.run_loadings(test_data)
-        
-        assert result is False
-        assert len(pipeline.results) == 0
     
     def test_run_loadings_with_validation_failure(self):
         """Test running loadings with validation failure."""

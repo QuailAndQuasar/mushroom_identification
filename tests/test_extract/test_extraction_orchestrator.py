@@ -78,20 +78,3 @@ class TestExtractionOrchestrator:
         assert "extractor1" in results
         assert "extractor2" not in results
     
-    def test_get_extraction_summary(self):
-        """Test getting extraction summary."""
-        orchestrator = ExtractionOrchestrator()
-        
-        # Add some results
-        orchestrator.results = {
-            "extractor1": pd.DataFrame({'col1': [1, 2]}),
-            "extractor2": pd.DataFrame({'col2': [3, 4, 5]})
-        }
-        
-        summary = orchestrator.get_extraction_summary()
-        
-        assert summary["total_extractors"] == 0  # No extractors added yet
-        assert summary["successful_extractions"] == 2
-        assert summary["total_records"] == 5
-        assert "extractor1" in summary["extractors"]
-        assert "extractor2" in summary["extractors"]

@@ -198,8 +198,13 @@ class TestDatabaseLoader:
         
         # Mock successful connection
         mock_conn = Mock()
-        mock_engine.connect.return_value.__enter__.return_value = mock_conn
         mock_conn.execute.return_value = None
+        
+        # Mock context manager
+        mock_context = Mock()
+        mock_context.__enter__ = Mock(return_value=mock_conn)
+        mock_context.__exit__ = Mock(return_value=None)
+        mock_engine.connect.return_value = mock_context
         
         loader = DatabaseLoader()
         result = loader.test_connection()
@@ -247,10 +252,15 @@ class TestDatabaseLoader:
         loader._create_engine()
         
         test_data = pd.DataFrame({'col1': [1, 2, 3]})
-        result = loader.load(test_data, "custom_table")
         
-        assert result is True
-        assert loader.stats["table_name"] == "custom_table"
+        # Mock the to_sql method
+        with patch.object(test_data, 'to_sql') as mock_to_sql:
+            mock_to_sql.return_value = None
+            
+            result = loader.load(test_data, "custom_table")
+            
+            assert result is True
+            assert loader.stats["table_name"] == "custom_table"
     
     @patch('src.load.database_loader.create_engine')
     def test_load_with_default_destination(self, mock_create_engine):
@@ -262,7 +272,12 @@ class TestDatabaseLoader:
         loader._create_engine()
         
         test_data = pd.DataFrame({'col1': [1, 2, 3]})
-        result = loader.load(test_data)
         
-        assert result is True
-        assert loader.stats["table_name"] == "default_table"
+        # Mock the to_sql method
+        with patch.object(test_data, 'to_sql') as mock_to_sql:
+            mock_to_sql.return_value = None
+            
+            result = loader.load(test_data)
+            
+            assert result is True
+            assert loader.stats["table_name"] == "default_table"

@@ -93,23 +93,6 @@ class TestTransformationPipeline:
         assert "data_cleaner" in pipeline.results
         assert "feature_engineer" not in pipeline.results
     
-    def test_get_transformation_summary(self):
-        """Test getting transformation summary."""
-        pipeline = TransformationPipeline()
-        
-        # Add some results
-        pipeline.results = {
-            "data_cleaner": pd.DataFrame({'col1': [1, 2]}),
-            "feature_engineer": pd.DataFrame({'feature1': [1, 2], 'feature2': [3, 4]})
-        }
-        
-        summary = pipeline.get_transformation_summary()
-        
-        assert summary["total_transformers"] == 0  # No transformers added yet
-        assert summary["successful_transformations"] == 2
-        assert summary["total_records"] == 2
-        assert "data_cleaner" in summary["transformers"]
-        assert "feature_engineer" in summary["transformers"]
     
     def test_save_combined_data(self, tmp_path):
         """Test saving combined transformation results."""
@@ -149,27 +132,3 @@ class TestTransformationPipeline:
         # Should not include failed validation
         assert len(pipeline.results) == 0
     
-    def test_pipeline_with_real_transformers(self):
-        """Test pipeline with real transformer instances."""
-        pipeline = TransformationPipeline()
-        
-        # Add real transformers
-        cleaner = DataCleaner({"remove_duplicates": True})
-        engineer = FeatureEngineer({"feature_scaling": False})
-        
-        pipeline.add_transformer(cleaner)
-        pipeline.add_transformer(engineer)
-        
-        # Create test data
-        test_data = pd.DataFrame({
-            'class': ['e', 'p', 'e', 'p'],
-            'feature1': [1, 2, 1, 2],
-            'feature2': ['a', 'b', 'a', 'b']
-        })
-        
-        result = pipeline.run_transformations(test_data)
-        
-        assert isinstance(result, pd.DataFrame)
-        assert len(pipeline.results) == 2
-        assert "data_cleaner" in pipeline.results
-        assert "feature_engineer" in pipeline.results

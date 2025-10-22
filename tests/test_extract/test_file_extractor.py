@@ -60,13 +60,10 @@ class TestFileExtractor:
         
         extractor = FileExtractor("test.csv", "csv")
         
-        with patch('src.extract.file_extractor.config') as mock_config:
-            mock_config.raw_data_dir = "/tmp/test"
-            
-            result = extractor.extract()
-            
-            assert isinstance(result, pd.DataFrame)
-            mock_read_csv.assert_called_once()
+        result = extractor.extract()
+        
+        assert isinstance(result, pd.DataFrame)
+        mock_read_csv.assert_called_once()
     
     @patch('pathlib.Path.exists')
     def test_extract_file_not_found(self, mock_exists):
