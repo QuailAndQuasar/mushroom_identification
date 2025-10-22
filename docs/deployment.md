@@ -139,7 +139,7 @@ grep "PERFORMANCE" logs/etl_pipeline.log
 #### 3. Metrics
 ```bash
 # View pipeline metrics
-python scripts/view_pipeline_metrics.py
+python scripts/view_pipeline_stats.py
 
 # Export metrics
 python scripts/export_metrics.py --format json
