@@ -93,12 +93,15 @@ class TestDatabaseLoader:
             'col2': ['a', 'b', 'c']
         })
         
-        result = loader.load(test_data, "test_table")
-        
-        assert result is True
-        assert loader.stats["records_loaded"] == 3
-        assert loader.stats["table_name"] == "test_table"
-        assert loader.stats["loading_successful"] is True
+        with patch.object(pd.DataFrame, 'to_sql') as mock_to_sql:
+            mock_to_sql.return_value = None
+            
+            result = loader.load(test_data, "test_table")
+            
+            assert result is True
+            assert loader.stats["records_loaded"] == 3
+            assert loader.stats["table_name"] == "test_table"
+            assert loader.stats["loading_successful"] is True
     
     @patch('src.load.database_loader.create_engine')
     def test_load_with_sqlalchemy_error(self, mock_create_engine):

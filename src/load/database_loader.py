@@ -19,7 +19,7 @@ class DatabaseLoader(BaseLoader):
             config: Configuration dictionary
         """
         default_config = {
-            "database_url": config.database.url,
+            "database_url": "sqlite:///data/mushroom_etl.db",
             "table_name": "mushroom_data",
             "if_exists": "replace",  # replace, append, fail
             "index": False,

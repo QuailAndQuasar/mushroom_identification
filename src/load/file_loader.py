@@ -20,7 +20,7 @@ class FileLoader(BaseLoader):
         """
         default_config = {
             "file_format": "csv",  # csv, parquet, json, excel
-            "output_dir": str(config.processed_data_dir),
+            "output_dir": "data/processed",
             "index": False,
             "header": True,
             "compression": None,  # gzip, bz2, xz

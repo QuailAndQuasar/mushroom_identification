@@ -60,7 +60,7 @@ class TestUCIMushroomExtractor:
         """Test successful data extraction."""
         # Mock configuration
         mock_config.raw_data_dir = "/tmp/test"
-        mock_config.data_source.uci_mushroom_url = "http://test.com/data"
+        mock_config.uci_mushroom_url = "http://test.com/data"
         
         # Mock HTTP response
         mock_response = Mock()
@@ -72,15 +72,17 @@ class TestUCIMushroomExtractor:
         
         with patch('builtins.open', mock_open()) as mock_file:
             with patch('pandas.read_csv') as mock_read_csv:
-                mock_read_csv.return_value = pd.DataFrame({
-                    'class': ['e', 'p'],
-                    'cap-shape': ['x', 'x']
-                })
-                
-                result = extractor.extract()
-                
-                assert isinstance(result, pd.DataFrame)
-                mock_get.assert_called_once()
+                with patch('pathlib.Path.mkdir') as mock_mkdir:
+                    with patch.object(pd.DataFrame, 'to_csv') as mock_to_csv:
+                        mock_read_csv.return_value = pd.DataFrame({
+                            'class': ['e', 'p'],
+                            'cap-shape': ['x', 'x']
+                        })
+                        
+                        result = extractor.extract()
+                        
+                        assert isinstance(result, pd.DataFrame)
+                        mock_get.assert_called_once()
     
     @patch('src.extract.uci_mushroom_extractor.requests.get')
     def test_extract_http_error(self, mock_get):

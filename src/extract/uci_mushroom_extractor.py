@@ -5,6 +5,7 @@ import pandas as pd
 import requests
 from typing import Dict, Any, Optional
 from pathlib import Path
+from io import StringIO
 from .base_extractor import BaseExtractor
 from ..utils.config import config
 
@@ -15,7 +16,7 @@ class UCIMushroomExtractor(BaseExtractor):
         super().__init__(
             name="uci_mushroom",
             config={
-                "url": config.data_source.uci_mushroom_url,
+                "url": config.uci_mushroom_url,
                 "output_file": "mushrooms.csv"
             }
         )
