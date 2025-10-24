@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🍄 Spore Analysis - Mushroom Identification</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .analysis-section {
+            margin-bottom: 40px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 5px solid #4CAF50;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title::before {
+            content: "🔬";
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .form-group select,
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group select:focus,
+        .form-group input:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            width: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(76, 175, 80, 0.3);
+        }
+
+        .results {
+            margin-top: 30px;
+            padding: 25px;
+            background: #e8f5e8;
+            border-radius: 15px;
+            border-left: 5px solid #4CAF50;
+        }
+
+        .result-item {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .result-item h3 {
+            color: #4CAF50;
+            margin-bottom: 10px;
+        }
+
+        .confidence-bar {
+            background: #f0f0f0;
+            height: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .confidence-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4CAF50, #45a049);
+            transition: width 0.3s;
+        }
+
+        .match-types {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .match-type {
+            background: #4CAF50;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #4CAF50;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            border: 1px solid #2196F3;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .info-box h4 {
+            color: #1976D2;
+            margin-bottom: 10px;
+        }
+
+        .info-box ul {
+            margin-left: 20px;
+        }
+
+        .info-box li {
+            margin-bottom: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔬 Spore Analysis</h1>
+            <p>Advanced mushroom identification through microscopic spore analysis</p>
+        </div>
+
+        <div class="content">
+            <div class="info-box">
+                <h4>📚 How to Use Spore Analysis</h4>
+                <ul>
+                    <li><strong>Spore Print:</strong> Place mushroom cap on paper to collect spores</li>
+                    <li><strong>Microscopy:</strong> Use microscope to examine spore characteristics</li>
+                    <li><strong>Morphology:</strong> Measure and observe spore shape and size</li>
+                    <li><strong>Features:</strong> Look for specific microscopic structures</li>
+                </ul>
+            </div>
+
+            <form id="sporeAnalysisForm">
+                <div class="analysis-section">
+                    <h2 class="section-title">Spore Print Analysis</h2>
+                    <div class="form-group">
+                        <label for="sporePrintColor">Spore Print Color</label>
+                        <select id="sporePrintColor" name="spore_print_color" required>
+                            <option value="">Select spore print color</option>
+                            <option value="white">White</option>
+                            <option value="cream">Cream</option>
+                            <option value="pink">Pink</option>
+                            <option value="brown">Brown</option>
+                            <option value="dark_brown">Dark Brown</option>
+                            <option value="black">Black</option>
+                            <option value="purple">Purple</option>
+                            <option value="green">Green</option>
+                            <option value="yellow">Yellow</option>
+                            <option value="orange">Orange</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="analysis-section">
+                    <h2 class="section-title">Spore Morphology</h2>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="sporeShape">Spore Shape</label>
+                            <select id="sporeShape" name="spore_shape" required>
+                                <option value="">Select spore shape</option>
+                                <option value="globose">Globose (round)</option>
+                                <option value="ellipsoid">Ellipsoid (oval)</option>
+                                <option value="cylindrical">Cylindrical</option>
+                                <option value="fusiform">Fusiform (spindle-shaped)</option>
+                                <option value="irregular">Irregular</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="sporeSize">Spore Size (μm)</label>
+                            <input type="text" id="sporeSize" name="spore_size" placeholder="e.g., 8-10 x 7-9" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="sporeSurface">Spore Surface</label>
+                            <select id="sporeSurface" name="spore_surface" required>
+                                <option value="">Select spore surface</option>
+                                <option value="smooth">Smooth</option>
+                                <option value="ornamented">Ornamented</option>
+                                <option value="reticulate">Reticulate (net-like)</option>
+                                <option value="verrucose">Verrucose (warty)</option>
+                                <option value="spiny">Spiny</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="sporeWall">Spore Wall Thickness</label>
+                            <select id="sporeWall" name="spore_wall_thickness" required>
+                                <option value="">Select wall thickness</option>
+                                <option value="thin">Thin</option>
+                                <option value="thick">Thick</option>
+                                <option value="very_thick">Very Thick</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="analysis-section">
+                    <h2 class="section-title">Microscopic Features</h2>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="basidia">Basidia</label>
+                            <select id="basidia" name="basidia" required>
+                                <option value="">Select basidia type</option>
+                                <option value="4-spored">4-spored</option>
+                                <option value="2-spored">2-spored</option>
+                                <option value="1-spored">1-spored</option>
+                                <option value="variable">Variable</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="cheilocystidia">Cheilocystidia</label>
+                            <select id="cheilocystidia" name="cheilocystidia" required>
+                                <option value="">Select cheilocystidia</option>
+                                <option value="present">Present</option>
+                                <option value="absent">Absent</option>
+                                <option value="rare">Rare</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="pleurocystidia">Pleurocystidia</label>
+                            <select id="pleurocystidia" name="pleurocystidia" required>
+                                <option value="">Select pleurocystidia</option>
+                                <option value="present">Present</option>
+                                <option value="absent">Absent</option>
+                                <option value="rare">Rare</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="pileipellis">Pileipellis</label>
+                            <select id="pileipellis" name="pileipellis" required>
+                                <option value="">Select pileipellis</option>
+                                <option value="cellular">Cellular</option>
+                                <option value="trichoderm">Trichoderm</option>
+                                <option value="cutis">Cutis</option>
+                                <option value="ixocutis">Ixocutis</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn">
+                    🔬 Analyze Spores
+                </button>
+            </form>
+
+            <div id="results" class="results" style="display: none;">
+                <h2 class="section-title">Analysis Results</h2>
+                <div id="resultsContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('sporeAnalysisForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+            
+            // Show loading
+            const resultsDiv = document.getElementById('results');
+            const resultsContent = document.getElementById('resultsContent');
+            resultsDiv.style.display = 'block';
+            resultsContent.innerHTML = `
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>Analyzing spore characteristics...</p>
+                </div>
+            `;
+            
+            try {
+                const response = await fetch('/analyze_spores', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                
+                if (result.error) {
+                    resultsContent.innerHTML = `
+                        <div class="result-item">
+                            <h3>❌ Analysis Error</h3>
+                            <p>${result.error}</p>
+                        </div>
+                    `;
+                } else {
+                    displayResults(result);
+                }
+            } catch (error) {
+                resultsContent.innerHTML = `
+                    <div class="result-item">
+                        <h3>❌ Network Error</h3>
+                        <p>Unable to connect to analysis service. Please try again.</p>
+                    </div>
+                `;
+            }
+        });
+        
+        function displayResults(result) {
+            const resultsContent = document.getElementById('resultsContent');
+            
+            if (!result.best_match) {
+                resultsContent.innerHTML = `
+                    <div class="result-item">
+                        <h3>🔍 No Matches Found</h3>
+                        <p>No species found matching the provided spore characteristics. Try adjusting your observations or consult additional identification methods.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            let html = `
+                <div class="result-item">
+                    <h3>🏆 Best Match</h3>
+                    <h4>${result.best_match.common_name}</h4>
+                    <p><strong>Scientific Name:</strong> ${result.best_match.species}</p>
+                    <p><strong>Confidence:</strong> ${(result.best_match.confidence * 100).toFixed(1)}%</p>
+                    <div class="confidence-bar">
+                        <div class="confidence-fill" style="width: ${result.best_match.confidence * 100}%"></div>
+                    </div>
+                    <div class="match-types">
+                        ${result.best_match.match_types.map(type => `<span class="match-type">${type}</span>`).join('')}
+                    </div>
+                </div>
+            `;
+            
+            if (result.all_matches && result.all_matches.length > 1) {
+                html += '<h4>📊 All Matches</h4>';
+                result.all_matches.forEach((match, index) => {
+                    if (index > 0) { // Skip best match as it's already shown
+                        html += `
+                            <div class="result-item">
+                                <h4>${match.common_name}</h4>
+                                <p><strong>Scientific Name:</strong> ${match.species}</p>
+                                <p><strong>Confidence:</strong> ${(match.confidence * 100).toFixed(1)}%</p>
+                                <div class="confidence-bar">
+                                    <div class="confidence-fill" style="width: ${match.confidence * 100}%"></div>
+                                </div>
+                                <div class="match-types">
+                                    ${match.match_types.map(type => `<span class="match-type">${type}</span>`).join('')}
+                                </div>
+                            </div>
+                        `;
+                    }
+                });
+            }
+            
+            if (result.analysis_summary) {
+                html += `
+                    <div class="result-item">
+                        <h4>📈 Analysis Summary</h4>
+                        <p><strong>Total species analyzed:</strong> ${result.analysis_summary.total_species_analyzed}</p>
+                        <p><strong>Spore print matches:</strong> ${result.analysis_summary.spore_print_matches}</p>
+                        <p><strong>Morphology matches:</strong> ${result.analysis_summary.morphology_matches}</p>
+                        <p><strong>Microscopic matches:</strong> ${result.analysis_summary.microscopic_matches}</p>
+                        <p><strong>Final matches:</strong> ${result.analysis_summary.final_matches}</p>
+                    </div>
+                `;
+            }
+            
+            resultsContent.innerHTML = html;
+        }
+    </script>
+</body>
+</html>

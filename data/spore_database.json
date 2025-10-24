@@ -1,0 +1,122 @@
+[
+  {
+    "species": "Agaricus bisporus",
+    "common_name": "Button Mushroom",
+    "spore_characteristics": {
+      "spore_print_color": "dark_brown",
+      "spore_shape": "ellipsoid",
+      "spore_size": "6-8 x 4-5 μm",
+      "spore_surface": "smooth",
+      "spore_wall_thickness": "thin",
+      "spore_ornamentation": "none"
+    },
+    "microscopic_features": {
+      "basidia": "4-spored",
+      "cheilocystidia": "present",
+      "pleurocystidia": "absent",
+      "pileipellis": "cellular"
+    },
+    "identification_key": [
+      "Dark brown spore print",
+      "Ellipsoid spores 6-8 x 4-5 μm",
+      "Smooth spore surface",
+      "4-spored basidia"
+    ]
+  },
+  {
+    "species": "Amanita phalloides",
+    "common_name": "Death Cap",
+    "spore_characteristics": {
+      "spore_print_color": "white",
+      "spore_shape": "globose",
+      "spore_size": "8-10 x 7-9 μm",
+      "spore_surface": "smooth",
+      "spore_wall_thickness": "thick",
+      "spore_ornamentation": "none"
+    },
+    "microscopic_features": {
+      "basidia": "4-spored",
+      "cheilocystidia": "absent",
+      "pleurocystidia": "absent",
+      "pileipellis": "cellular"
+    },
+    "identification_key": [
+      "White spore print",
+      "Globose spores 8-10 x 7-9 μm",
+      "Smooth spore surface",
+      "Thick spore wall"
+    ]
+  },
+  {
+    "species": "Pleurotus ostreatus",
+    "common_name": "Oyster Mushroom",
+    "spore_characteristics": {
+      "spore_print_color": "white_to_lilac",
+      "spore_shape": "cylindrical",
+      "spore_size": "8-12 x 3-4 μm",
+      "spore_surface": "smooth",
+      "spore_wall_thickness": "thin",
+      "spore_ornamentation": "none"
+    },
+    "microscopic_features": {
+      "basidia": "4-spored",
+      "cheilocystidia": "present",
+      "pleurocystidia": "absent",
+      "pileipellis": "cellular"
+    },
+    "identification_key": [
+      "White to lilac spore print",
+      "Cylindrical spores 8-12 x 3-4 μm",
+      "Smooth spore surface",
+      "4-spored basidia"
+    ]
+  },
+  {
+    "species": "Lactarius deliciosus",
+    "common_name": "Saffron Milk Cap",
+    "spore_characteristics": {
+      "spore_print_color": "cream",
+      "spore_shape": "ellipsoid",
+      "spore_size": "7-9 x 6-7 μm",
+      "spore_surface": "ornamented",
+      "spore_wall_thickness": "thick",
+      "spore_ornamentation": "reticulate"
+    },
+    "microscopic_features": {
+      "basidia": "4-spored",
+      "cheilocystidia": "present",
+      "pleurocystidia": "absent",
+      "pileipellis": "cellular"
+    },
+    "identification_key": [
+      "Cream spore print",
+      "Ellipsoid spores 7-9 x 6-7 μm",
+      "Reticulate spore ornamentation",
+      "Thick spore wall"
+    ]
+  },
+  {
+    "species": "Coprinus comatus",
+    "common_name": "Shaggy Mane",
+    "spore_characteristics": {
+      "spore_print_color": "black",
+      "spore_shape": "ellipsoid",
+      "spore_size": "10-15 x 6-8 μm",
+      "spore_surface": "smooth",
+      "spore_wall_thickness": "thick",
+      "spore_ornamentation": "none"
+    },
+    "microscopic_features": {
+      "basidia": "4-spored",
+      "cheilocystidia": "present",
+      "pleurocystidia": "absent",
+      "pileipellis": "cellular"
+    },
+    "identification_key": [
+      "Black spore print",
+      "Ellipsoid spores 10-15 x 6-8 μm",
+      "Smooth spore surface",
+      "Thick spore wall"
+    ]
+  }
+]
