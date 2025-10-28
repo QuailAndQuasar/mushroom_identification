@@ -26,7 +26,8 @@ python mushroom_app_enhanced.py
 ### 3. Access the Applications
 - **Basic Web Interface**: http://localhost:5001 (mushroom_app_enhanced.py)
 - **Spore Analysis Interface**: http://localhost:5002 (mushroom_app_spore.py)
-- **API Health**: http://localhost:5001/health or http://localhost:5002/health
+- **AI-Enhanced Analysis**: http://localhost:5003 (mushroom_app_ai.py)
+- **API Health**: http://localhost:5001/health, http://localhost:5002/health, or http://localhost:5003/health
 - **Species Database**: http://localhost:5001/species
 
 ## 🎯 What This Project Does
@@ -35,11 +36,13 @@ python mushroom_app_enhanced.py
 - **🍄 Mushroom Classification**: Binary classification (edible vs poisonous)
 - **🔍 Species Identification**: Identifies specific mushroom species when edible
 - **🔬 Spore Analysis**: Advanced microscopic spore identification
+- **🤖 AI-Enhanced Analysis**: Computer vision and NLP-powered spore analysis
 - **🌐 Web Interface**: User-friendly web application with multiple interfaces
 - **📊 Data Pipeline**: Complete ETL pipeline with data processing
 - **🤖 Machine Learning**: Multiple ML models (Random Forest, Logistic Regression, SVM)
 - **📱 Mobile Ready**: React Native and Flutter mobile apps
 - **🚀 Production Ready**: Docker, Kubernetes, CI/CD deployment
+- **🔧 Development Tools**: Dead code detection and AI-powered development
 
 ### Data Science Pipeline
 1. **Data Extraction**: UCI Mushroom Dataset processing
@@ -55,6 +58,7 @@ mushroom_identification/
 ├── 🍄 Core Applications
 │   ├── mushroom_app_enhanced.py      # Main Flask web app (port 5001)
 │   ├── mushroom_app_spore.py         # Spore analysis app (port 5002)
+│   ├── mushroom_app_ai.py            # AI-enhanced analysis app (port 5003)
 │   ├── templates/mushroom_identifier.html  # Basic web interface
 │   ├── templates/spore_analysis.html      # Spore analysis interface
 │   └── data/mushroom_species.json    # Species database
@@ -62,6 +66,10 @@ mushroom_identification/
 │   ├── src/analysis/spore_analyzer.py     # Spore analysis engine
 │   ├── data/spore_database.json           # Spore characteristics database
 │   └── templates/spore_analysis.html      # Spore analysis UI
+├── 🤖 AI-Enhanced Analysis
+│   ├── src/analysis/ai_spore_analyzer.py  # AI spore analysis engine
+│   ├── mushroom_app_ai.py                 # AI-powered Flask app
+│   └── templates/ai_analysis.html         # AI analysis interface
 ├── 🤖 Machine Learning
 │   ├── models/random_forest.joblib  # Trained ML model
 │   ├── scripts/create_ml_model.py   # Model training
@@ -78,9 +86,10 @@ mushroom_identification/
 │   ├── k8s-deployment.yaml         # Kubernetes deployment
 │   └── terraform/                  # AWS infrastructure
 └── 🧪 Testing & AI
-    ├── tests/                      # Comprehensive test suite
-    ├── scripts/ai_agents.py        # AI development tools
-    └── scripts/ai_enhancements.py  # AI enhancement examples
+    ├── tests/                          # Comprehensive test suite
+    ├── scripts/ai_agents.py           # AI development tools
+    ├── scripts/ai_enhancements.py     # AI enhancement examples
+    └── scripts/dead_code_analyzer.py  # Dead code detection tool
 ```
 
 ## 🛠️ Available Scripts
@@ -140,6 +149,9 @@ python -m pytest tests/ --cov=src --cov-report=html
 # AI development tools
 python scripts/ai_agents.py
 python scripts/ai_enhancements.py
+
+# Dead code detection
+python scripts/dead_code_analyzer.py
 ```
 
 ## 🌐 Web Application Features
@@ -158,6 +170,15 @@ python scripts/ai_enhancements.py
 - **Comprehensive Results**: Multi-method confidence scoring
 - **Scientific Accuracy**: Professional-grade identification
 
+### AI-Enhanced Analysis Interface (Port 5003)
+- **Computer Vision**: AI-powered spore image analysis using PIL and numpy
+- **Natural Language Processing**: Text description analysis with keyword extraction
+- **Pattern Recognition**: Complex spore relationship detection
+- **Intelligent Suggestions**: AI-recommended next steps for identification
+- **Combined Analysis**: Multi-method approach for higher accuracy
+- **Advanced Confidence Scoring**: Sophisticated reliability metrics
+- **Hybrid Approach**: Combines AI with traditional mycological methods
+
 ### API Endpoints
 #### Basic App (Port 5001)
 - `GET /` - Main web interface
@@ -169,6 +190,17 @@ python scripts/ai_enhancements.py
 - `GET /` - Main web interface
 - `GET /spore-analysis` - Spore analysis interface
 - `POST /analyze_spores` - Spore analysis API
+- `GET /spore_database` - Spore database statistics
+- `GET /species_spore_info/<species>` - Species spore information
+- `GET /health` - Health check
+
+#### AI-Enhanced App (Port 5003)
+- `GET /` - Main web interface
+- `GET /spore-analysis` - Spore analysis interface
+- `GET /ai-analysis` - AI analysis interface
+- `POST /predict` - ML classification API
+- `POST /analyze_spores` - Traditional spore analysis API
+- `POST /ai_analyze_spores` - AI-powered spore analysis API
 - `GET /spore_database` - Spore database statistics
 - `GET /species_spore_info/<species>` - Species spore information
 - `GET /health` - Health check
@@ -238,7 +270,25 @@ Random Forest Results:
 - F1-Score: 100% (Edible), 100% (Poisonous)
 ```
 
-## 🔬 Spore Analysis Details
+## 🤖 AI-Enhanced Features
+
+### AI Spore Analysis
+- **Computer Vision**: Analyzes spore images using PIL and numpy preprocessing
+- **Natural Language Processing**: Extracts features from text descriptions
+- **Pattern Recognition**: Identifies complex spore relationships
+- **Intelligent Suggestions**: AI-powered recommendations for better identification
+- **Combined Analysis**: Integrates multiple AI methods for higher accuracy
+
+### Dead Code Detection
+- **AST-Based Analysis**: Parses Python files to identify unused code
+- **Comprehensive Reporting**: Detailed analysis with cleanup recommendations
+- **Edge Case Handling**: Manages syntax errors, empty directories, non-Python files
+- **Integration Testing**: End-to-end analysis workflows
+
+### Development Tools
+- **AI Agents**: Automated development assistance
+- **Code Analysis**: Pattern recognition and improvement suggestions
+- **Quality Assurance**: Comprehensive test coverage for all features
 
 ### Scientific Identification
 - **Spore Print Analysis**: Color-based identification
