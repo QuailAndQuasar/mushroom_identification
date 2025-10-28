@@ -2,6 +2,14 @@
 
 A complete machine learning pipeline for mushroom classification with web interface, species identification, and production deployment capabilities.
 
+## IMPORTANT EXPLAINATION
+This application is meant to be a sandbox (or playground) to learn and demonstrate aspects of Data Science with LLMs.  It's huge and packed with stuff.  
+
+Usually, I would implement this with a seperation of concerns distrubuted with multiple repos operating in conjunction with some sort of base repository.  
+
+I don't usually jam it all together like this.
+
+
 ## 🚀 Quick Start
 
 ### 1. Clone & Setup
